@@ -6,6 +6,7 @@ class User {
     public function __construct($db) {
         $this->db = $db;
 
+    }
     public function login($username, $password) {
 
         $sql = "SELECT * FROM administrateurs WHERE nom_utilisateur = :username AND mot_de_passe = :password";
@@ -16,7 +17,6 @@ class User {
         $stmt->execute();
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
     }
     
 }
