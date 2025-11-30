@@ -2,11 +2,11 @@
 
 
 
-<div class="contain style-dark">
+<div class="container style-dark text-center py-5" data-bs-theme="light" style="min-height:60vh">
        <span style="font-size:75px;">404</span>
     <h1>Page introuvable</h1>
     <p>Désolé, la page que vous recherchez n'existe pas.</p>
-    <a href="?page=index" class="style-dark">Retour à la page d'accueil</a>
+    <a href="?action=accueil" class="style-dark">Retour à la page d'accueil</a>
        
 </div>
 
