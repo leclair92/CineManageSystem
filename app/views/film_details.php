@@ -4,103 +4,111 @@
         <a href="?action=accueil" class="btn-link text-uppercase fw-bold"><i class="bi bi-arrow-left-circle-fill"></i> Retour</a> <br> 
     </div>
     <div class="row">
-        <div class="col-lg-3"><img src="<?php echo BASE_URL; ?>images/Intouchables.jpg"></div>
+        <div class="col-lg-3">
+                <div class="card text-bg-dark h-100">
+                    <!--<img src="<?php echo BASE_URL; ?>images/Intouchables.jpg" class="card-img" alt="<?= htmlspecialchars($film['titre']) ?>">-->
+                    <p class="card-category-pill m-0"><?= htmlspecialchars($film['genre']) ?></p>
+                </div>    
+       </div>
         <div class="col-lg-9">
             <div class="row">
                 <div class="col-lg-9">
                     <h1 class="mb-0"><?= htmlspecialchars($film['titre']) ?></h1>
                     <p class="lead"><?= htmlspecialchars($film['description']) ?></p>
                 </div>
-                <div class="col-lg-3">
-                    <a href="#" class="btn btn-primary"><i class="bi bi-ticket-detailed"></i> Acheter un billet</a>
+                <div class="col-lg-3 text-end">
+                    <!--<a href="#" class="btn btn-primary"><i class="bi bi-ticket-detailed"></i> Acheter un billet</a>-->
                 </div>
             </div>
-            <div class="row">
+            <div class="row pt-3">
+                <!-- Tabs -->
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="info-tab" data-bs-toggle="tab" data-bs-target="#info" type="button">
+                            <i class="bi bi-list-ul text-primary me-1"></i> Informations
+                        </button>
+                    </li><!--
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="horaire-tab" data-bs-toggle="tab" data-bs-target="#horaire" type="button">
+                            <i class="bi bi-clock-history text-primary me-1"></i> Horaire
+                        </button>
+                    </li>-->
+                </ul>
 
-    <!-- Tabs -->
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="info-tab" data-bs-toggle="tab" data-bs-target="#info" type="button">
-                <i class="bi bi-list-ul text-primary"></i> Informations
-            </button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="horaire-tab" data-bs-toggle="tab" data-bs-target="#horaire" type="button">
-                <i class="bi bi-clock-history text-primary"></i> Horaire
-            </button>
-        </li>
-    </ul>
+                <div class="tab-content bg-white p-4 shadow">
 
-    <div class="tab-content bg-white p-3">
-
-        <!-- Informations tab -->
-        <div class="tab-pane fade show active" id="info" role="tabpanel">
-            <p>Contenu informations…</p>
-        </div>
-
-        <!-- Horaire tab -->
-        <div class="tab-pane fade" id="horaire" role="tabpanel">
-
-            <div class="row g-3">
-
-                <!-- Column 1 -->
-                <div class="col-md-6">
-                    <!-- Card 16 NOV - Salle 1 -->
-                    <div class="d-flex align-items-center bg-secondary">
-                        <div class="date-box">
-                            <div>16</div>
-                            <div>NOV</div>
-                        </div>
-                        <div class="schedule-card flex-grow-1">
-                            <strong>Salle 1</strong>
-                            <div class="hour-list">10h00 | 12h05 | 21h45</div>
+                    <!-- Informations tab -->
+                    <div class="tab-pane fade show active" id="info" role="tabpanel">
+                        <div class="row g-5">
+                            <div class="col-lg-6">
+                                <div class="d-flex justify-content-between border-bottom">
+                                    <p class="fw-bold">Année de sortie</p><p><?= $film['annee_sortie'] ?></p>
+                                </div>
+                                <div class="d-flex justify-content-between border-bottom mt-3">
+                                    <p class="fw-bold">Réalisateur</p><p><?= $film['realisateur'] ?></p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="d-flex justify-content-between border-bottom">
+                                    <p class="fw-bold">Réalisateur</p><p><?= $film['genre'] ?></p>
+                                </div>                     
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Card 17 NOV - Salle 2 -->
-                    <div class="d-flex align-items-center mt-3">
-                        <div class="date-box">
-                            <div>17</div>
-                            <div>NOV</div>
+                  <!-- <div class="tab-pane fade" id="horaire" role="tabpanel">
+
+                        <div class="row g-3">
+
+                            <div class="col-md-6">
+                                <div class="date-box-wrap d-flex align-items-center bg-secondary">
+                                    <div class="date-box">
+                                        <div class="date">16</div>
+                                        <div class="month">NOV</div>
+                                    </div>
+                                    <div class="schedule-card flex-grow-1">
+                                        <strong>Salle 1</strong>
+                                        <div class="hour-list">10h00 | 12h05 | 21h45</div>
+                                    </div>
+                                </div>
+                                <div class="date-box-wrap d-flex align-items-center bg-secondary mt-3">
+                                    <div class="date-box">
+                                        <div class="date">17</div>
+                                        <div class="month">NOV</div>
+                                    </div>
+                                    <div class="schedule-card flex-grow-1">
+                                        <strong>Salle 2</strong>
+                                        <div class="hour-list">10h00 | 12h05 | 21h45</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="date-box-wrap d-flex align-items-center bg-secondary">
+                                    <div class="date-box">
+                                        <div class="date">18</div>
+                                        <div class="month">NOV</div>
+                                    </div>
+                                    <div class="schedule-card flex-grow-1">
+                                        <strong>Salle 2</strong>
+                                        <div class="hour-list">10h00 | 12h05 | 21h45</div>
+                                    </div>
+                                </div>
+
+                                <div class="date-box-wrap d-flex align-items-center mt-3 bg-secondary">
+                                    <div class="date-box">
+                                        <div class="date">19</div>
+                                        <div class="month">NOV</div>
+                                    </div>
+                                    <div class="schedule-card flex-grow-1">
+                                        <strong>Salle 3</strong>
+                                        <div class="hour-list">10h00 | 12h05 | 21h45</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="schedule-card flex-grow-1">
-                            <strong>Salle 2</strong>
-                            <div class="hour-list">10h00 | 12h05 | 21h45</div>
-                        </div>
-                    </div>
+                    </div>-->
                 </div>
-
-                <!-- Column 2 -->
-                <div class="col-md-6">
-                    <!-- Card 16 NOV - Salle 2 -->
-                    <div class="d-flex align-items-center">
-                        <div class="date-box">
-                            <div>16</div>
-                            <div>NOV</div>
-                        </div>
-                        <div class="schedule-card flex-grow-1">
-                            <strong>Salle 2</strong>
-                            <div class="hour-list">10h00 | 12h05 | 21h45</div>
-                        </div>
-                    </div>
-
-                    <!-- Card 17 NOV - Salle 3 -->
-                    <div class="d-flex align-items-center mt-3">
-                        <div class="date-box">
-                            <div>17</div>
-                            <div>NOV</div>
-                        </div>
-                        <div class="schedule-card flex-grow-1">
-                            <strong>Salle 3</strong>
-                            <div class="hour-list">10h00 | 12h05 | 21h45</div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
             </div>
         </div>
     </div>

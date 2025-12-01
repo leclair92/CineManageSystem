@@ -24,14 +24,43 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header class="shadow mb-0" data-bs-theme="light"> 
-        <div class="container d-flex flex-wrap justify-content-center align-items-center">
-        <a href="?action=accueil" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"> 
+    <header class="shadow mb-0 p-0" data-bs-theme="light"> 
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light">
+  <div class="container">
+
+      <a href="?action=accueil" class="d-flex align-items-center mb-md-0 me-md-auto link-body-emphasis text-decoration-none"> 
         <img src="<?php echo BASE_URL; ?>/images/logo.jpg" width="150"> </a> 
-            <ul class="nav"> 
-                <li class="nav-item"><a href="?action=accueil" class="nav-link active" aria-current="page">Films à l'affiche</a></li> 
-                <li class="nav-item"><a href="?action=inscription" type="button" class="btn btn-outline-secondary me-2">Inscription</a></li> 
-                <li class="nav-item"><a href="?action=login" type="button" class="btn btn-primary">Connexion</a></li> 
-            </ul> 
+
+        <!-- Toggler button only visible on mobile -->
+        <button class="navbar-toggler" 
+                type="button" 
+                data-bs-toggle="collapse" 
+                data-bs-target="#navMenu"
+                aria-controls="navMenu" 
+                aria-expanded="false" 
+                aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Collapsible menu -->
+        <div class="collapse navbar-collapse" id="navMenu">
+
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center"> 
+                    <li class="nav-item"><a href="?action=accueil" class="nav-link active" aria-current="page">Films à l'affiche</a></li> 
+                    
+                    <?php if (isset($_SESSION['user'])): ?>
+                        <li class="nav-item"><a href="?action=dashboard" class="fw-bold text-uppercase p-2"><i class="bi bi-person-fill"></i><?= htmlspecialchars($_SESSION['user']['username']) ?></a></li> 
+                        <li class="nav-item"><a class="btn btn-primary w-100" href="index.php?action=logout">Déconnexion</a></li> 
+                    <?php else: ?>
+                        <!--<li class="nav-item"><a href="?action=inscription" type="button" class="btn btn-outline-secondary me-2">Inscription</a></li>-->
+                        <li class="nav-item"><a href="?action=login" type="button" class="btn btn-primary">Connexion</a></li> 
+                    <?php endif; ?>
+                </ul> 
         </div>
+  </div>
+</nav>
+
     </header>

@@ -46,5 +46,45 @@ class Film {
         $stmt = $this->db->prepare("DELETE FROM films WHERE id = :id");
         return $stmt->execute([':id' => $id]);
     }
+
+    public function getAnneeSortie() {
+        $stmt = $this->db->prepare("SELECT DISTINCT annee_sortie FROM films ORDER BY annee_sortie ASC");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_COLUMN);
+    }
+    public function getGenres() {
+        $stmt = $this->db->prepare("SELECT DISTINCT genre FROM films ORDER BY genre ASC");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_COLUMN);
+    }
+
+    public function filtrerFilms($recherche, $annee, $genre) {
+
+    $sql = "SELECT * FROM films WHERE 1=1";
+    $params = [];
+
+    if (!empty($recherche)) {
+        $sql .= " AND titre LIKE :recherche";
+        $params[':recherche'] = "%$recherche%";
+    }
+
+    if (!empty($annee)) {
+        $sql .= " AND annee_sortie  = :annee";
+        $params[':annee'] = $annee;
+    }
+
+    if (!empty($genre)) {
+        $sql .= " AND genre = :genre";
+        $params[':genre'] = $genre;
+    }
+
+    $sql .= " ORDER BY titre ASC";
+
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute($params);
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 }
 ?>
