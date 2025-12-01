@@ -7,84 +7,69 @@ class Film {
     }
 
     public function getAllFilms() {
-        $stmt = $this->db->query("SELECT * FROM films ORDER BY annee_sortie DESC");
+        $stmt = $this->db->query("SELECT films.*, genre.nom AS genre_nom
+            FROM films
+            INNER JOIN genre ON films.genre = genre.id
+            ORDER BY films.annee_sortie DESC");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getFilmById($id) {
-        $stmt = $this->db->prepare("SELECT * FROM films WHERE id = :id");
+        $stmt = $this->db->prepare("SELECT films.*, genre.nom AS genre_nom
+        FROM films
+        JOIN genre ON films.genre = genre.id
+        WHERE films.id = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public function addFilm($data) {
-        $stmt = $this->db->prepare("INSERT INTO films (titre, realisateur, genre, annee_sortie, description) VALUES (:titre, :realisateur, :genre, :annee_sortie, :description)");
+        $affiche = $data['photo'] ?? null;
+
+        $stmt = $this->db->prepare("
+        INSERT INTO films (titre, realisateur, genre, annee_sortie, description, affiche_film) 
+        VALUES (:titre, :realisateur, :genre, :annee_sortie, :description, :affiche_film)
+        ");
+
         $stmt->execute([
-            ':titre' => $data['titre'],
-            ':realisateur' => $data['realisateur'],
-            ':genre' => $data['genre'],
-            ':annee_sortie' => $data['annee_sortie'],
-            ':description' => $data['description']
+        ':titre' => $data['titre'],
+        ':realisateur' => $data['realisateur'],
+        ':genre' => $data['genre'],
+        ':annee_sortie' => $data['annee_sortie'],
+        ':description' => $data['description'],
+        ':affiche_film' => $affiche
         ]);
         return $this->db->lastInsertId();
     }
-
     public function updateFilm($id, $data) {
-        $stmt = $this->db->prepare("UPDATE films SET titre = :titre, realisateur = :realisateur, genre = :genre, annee_sortie = :annee_sortie, description = :description WHERE id = :id");
+  
+        $affiche = $data['photo'] ?? $data['ancienne_photo'] ?? null;
+
+        $stmt = $this->db->prepare("
+        UPDATE films 
+        SET titre = :titre, realisateur = :realisateur, genre = :genre, annee_sortie = :annee_sortie, description = :description, affiche_film = :affiche_film
+        WHERE id = :id
+        ");
+
         return $stmt->execute([
-            ':titre' => $data['titre'],
-            ':realisateur' => $data['realisateur'],
-            ':genre' => $data['genre'],
-            ':annee_sortie' => $data['annee_sortie'],
-            ':description' => $data['description'],
-            ':id' => $id
+        ':titre' => $data['titre'],
+        ':realisateur' => $data['realisateur'],
+        ':genre' => $data['genre'], // ID du genre
+        ':annee_sortie' => $data['annee_sortie'],
+        ':description' => $data['description'],
+        ':affiche_film' => $affiche,
+        ':id' => $id
         ]);
     }
-
     public function deleteFilm($id) {
         $stmt = $this->db->prepare("DELETE FROM films WHERE id = :id");
         return $stmt->execute([':id' => $id]);
     }
-
-    public function getAnneeSortie() {
-        $stmt = $this->db->prepare("SELECT DISTINCT annee_sortie FROM films ORDER BY annee_sortie ASC");
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_COLUMN);
+    public function getAllGenres() {
+        $sql = "SELECT * FROM genre ORDER BY nom";
+        return $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function getGenres() {
-        $stmt = $this->db->prepare("SELECT DISTINCT genre FROM films ORDER BY genre ASC");
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_COLUMN);
-    }
-
-    public function filtrerFilms($recherche, $annee, $genre) {
-
-    $sql = "SELECT * FROM films WHERE 1=1";
-    $params = [];
-
-    if (!empty($recherche)) {
-        $sql .= " AND titre LIKE :recherche";
-        $params[':recherche'] = "%$recherche%";
-    }
-
-    if (!empty($annee)) {
-        $sql .= " AND annee_sortie  = :annee";
-        $params[':annee'] = $annee;
-    }
-
-    if (!empty($genre)) {
-        $sql .= " AND genre = :genre";
-        $params[':genre'] = $genre;
-    }
-
-    $sql .= " ORDER BY titre ASC";
-
-    $stmt = $this->db->prepare($sql);
-    $stmt->execute($params);
-
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-
+    
 }
 ?>

@@ -1,35 +1,48 @@
-<?php require __DIR__ . '/layouts/header.php'; ?>
-<div class="container py-5" data-bs-theme="light">
-    <div class="row bg-white" style="border-radius:0.5em">
-        <div class="col-lg-3 p-0 bg-secondary admin-dash-menu">
-            <?php require __DIR__ . '/layouts/dashboard-menu.php'; ?>
-        </div>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Admin - CineGest</title>
+</head>
+<body>
 
-        <div class="col-lg-9 p-4 admin-dash">
-            <h1 class="h2 mt-0">Dashboard Admin</h1>
-            <table border="1" class="mb-3">
-                <tr>
-                    <th>Titre</th>
-                    <th>Année</th>
-                    <th>Genre</th>
-                    <th class="text-end" style="max-width:100px;">Actions</th>
-                </tr>
-
-                <?php foreach ($films as $film) : ?>
-                    <tr>
-                        <td><span class="fw-bold"><?= htmlspecialchars($film['titre']) ?></span></td>
-                         <td><?= htmlspecialchars($film['annee_sortie']) ?></td>
-                         <td><?= htmlspecialchars($film['genre']) ?></td>
-                        <td class="text-end">
-                            <a href="?action=dashboard?page=edit_film&id=<?= $film['id'] ?>"><i class="bi bi-pencil-square" style="font-size: 1.3rem;"></i></a>
-                            &nbsp;<a href="?action=dashboard?page=delete_film&id=<?= $film['id'] ?>"
-                            onclick="return confirm('Supprimer ?')"><i class="bi bi-trash3-fill" style="font-size: 1.3rem;"></i></a>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </table>
-                 <a href="index.php?page=add_film" class="btn btn-secondary"><i class="bi bi-plus text-primary"s></i> Ajouter un film</a>
-        </div>
+<header class="top-header">
+    <div class="logo">
+        
     </div>
+
+    <nav class="top-nav">
+        <a href="#">Films à l'affiche</a>
+        <a href="#">Billetterie</a>
+        <a href="#">Contact</a>
+        <span class="user">
+            <strong>Amélie</strong>
+        </span>
+        <p><?php echo date('D') . ' ' . date('M') . ' ' . date('Y'); ?></p>
+        <a href="index.php?action=logout" class="logout-btn">Déconnexion</a>
+    </nav>
+</header>
+
+<div class="dashboard-container">
+
+    <aside class="sidebar">
+        <h3>Tableau de bord</h3>
+
+        <ul class="menu">
+            <li><a href="index.php?action=liste_films">Films</a></li>
+            <li><a href="#">Salles</a></li>
+            <li><a href="#">Séances</a></li>
+            <li><a href="#">Utilisateurs</a></li>
+            <li><a href="#">Réglages</a></li>
+        </ul>
+
+        <div class="sidebar-footer">
+            <a href="index.php?action=logout" class="logout-btn">Déconnexion</a>
+        </div>
+    </aside>
+
 </div>
-<?php require __DIR__ . '/layouts/footer.php'; ?>
+
+</body>
+</html>
+
