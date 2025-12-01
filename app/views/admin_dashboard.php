@@ -1,30 +1,48 @@
-<?php require __DIR__ . '/layouts/header.php'; ?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Admin - CineGest</title>
+</head>
+<body>
 
-<h2>Dashboard Admin</h2>
+<header class="top-header">
+    <div class="logo">
+        
+    </div>
 
-<a href="index.php?page=add_film">Ajouter un film</a>
+    <nav class="top-nav">
+        <a href="#">Films à l'affiche</a>
+        <a href="#">Billetterie</a>
+        <a href="#">Contact</a>
+        <span class="user">
+            <strong>Amélie</strong>
+        </span>
+        <p><?php echo date('D') . ' ' . date('M') . ' ' . date('Y'); ?></p>
+        <a href="index.php?action=logout" class="logout-btn">Déconnexion</a>
+    </nav>
+</header>
 
-<table border="1">
-    <tr>
-        <th>ID</th>
-        <th>Titre</th>
-        <th>Actions</th>
-    </tr>
+<div class="dashboard-container">
 
-    <?php foreach ($films as $film) : ?>
-        <tr>
-            <td><?= $film['id'] ?></td>
-            <td><?= htmlspecialchars($film['titre']) ?></td>
-            <td>
-                <a href="index.php?page=edit_film&id=<?= $film['id'] ?>">Modifier</a> |
-                <a href="index.php?page=delete_film&id=<?= $film['id'] ?>"
-                   onclick="return confirm('Supprimer ?')">Supprimer</a>
-            </td>
-        </tr>
-    <?php endforeach; ?>
+    <aside class="sidebar">
+        <h3>Tableau de bord</h3>
 
-</table>
+        <ul class="menu">
+            <li><a href="index.php?action=liste_films">Films</a></li>
+            <li><a href="#">Salles</a></li>
+            <li><a href="#">Séances</a></li>
+            <li><a href="#">Utilisateurs</a></li>
+            <li><a href="#">Réglages</a></li>
+        </ul>
 
-<a href="index.php?action=logout">Déconnexion</a>
+        <div class="sidebar-footer">
+            <a href="index.php?action=logout" class="logout-btn">Déconnexion</a>
+        </div>
+    </aside>
 
-<?php require __DIR__ . '/layouts/footer.php'; ?>
+</div>
+
+</body>
+</html>
+
