@@ -1,24 +1,33 @@
 <?php
 
 class User {
-    private $db;
+    private PDO $db;
 
-    public function __construct($db) {
+    public function __construct(PDO $db) {
         $this->db = $db;
-
     }
-    public function login($username, $password) {
 
-        $sql = "SELECT * FROM administrateurs WHERE nom_utilisateur = :username AND mot_de_passe = :password";
+    /**
+     * Authentifie un utilisateur admin à partir de son nom et mot de passe.
+     * Retourne le tableau $user si OK, ou false si échec.
+     */
+    public function login(string $username, string $password) {
+        // On cherche l'utilisateur dans la table administrateurs
+        $sql = "SELECT * FROM administrateurs WHERE nom_utilisateur = :username LIMIT 1";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(':username', $username, PDO::PARAM_STR);
-        $stmt->bindValue(':password', $password, PDO::PARAM_STR);
+        $stmt->execute([':username' => $username]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $stmt->execute();
+        // Si on a trouvé un utilisateur avec un mot de passe
+        if ($user && isset($user['mot_de_passe'])) {
+            // Vérifier le mot de passe fourni avec le hash en BD
+            if (password_verify($password, $user['mot_de_passe'])) {
+                // Succès : on retourne toutes les infos de l'utilisateur
+                return $user;
+            }
+        }
 
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        // Échec de l'authentification
+        return false;
     }
-    
 }
-
-?>
