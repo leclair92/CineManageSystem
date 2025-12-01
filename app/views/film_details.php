@@ -35,7 +35,14 @@
                     </li>-->
                 </ul>
 
-                <div class="tab-content bg-white p-4 shadow">
+<a href="<?php echo BASE_URL; ?>index.php?action=accueil">⬅ Retour</a> <br> 
+<br>
+<h2><?= htmlspecialchars($film['titre']) ?></h2>
+<p><strong>Réalisateur :</strong> <?= htmlspecialchars($film['realisateur']) ?></p>
+<p><strong>Genre :</strong> <?= htmlspecialchars($film['genre_nom']) ?></p>
+<p><strong>Année :</strong> <?= htmlspecialchars($film['annee_sortie']) ?></p>
+<p><strong>Description:</strong>
+<?= htmlspecialchars($film['description']) ?></p>
 
                     <!-- Informations tab -->
                     <div class="tab-pane fade show active" id="info" role="tabpanel">
