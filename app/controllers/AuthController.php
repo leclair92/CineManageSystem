@@ -5,8 +5,14 @@ class AuthController {
     private $db;
     private $userModel;
 
-    public function __construct($db) {
-        $this->db = $db;
+   // changement 1
+   public function __construct($db) {
+        // Démarrer la session une seule fois ici
+        if (session_status() === PHP_SESSION_NONE) {//retourne etat de la session
+            session_start();
+        }
+
+        $this->db = $db; //garde conexion
         $this->userModel = new User($db);
     }
 
@@ -15,7 +21,8 @@ class AuthController {
 
         if ($action === 'logout') {
             $this->logout();
-        } else {
+        } // changement 2  // Récupérer un éventuel message d’erreur de la session
+         else {
             $error = $_SESSION['login_error'] ?? null;
             unset($_SESSION['login_error']);
             require '../app/views/login.php';
@@ -25,30 +32,46 @@ class AuthController {
     public function handlePost($params, $postData) {
         $username = trim($postData['username'] ?? '');
         $password = trim($postData['password'] ?? '');
+//cHANGEMENT 3
 
-        if ($username !== '' && $password !== '') {
-            $user = $this->userModel->login($username, $password);
-            if ($user) {
-                $_SESSION['admin'] = $user['nom_utilisateur'];
-                header('Location: index.php?action=dashboard'); // redirection vers liste des films
-                exit;
-            } else {
-                $_SESSION['login_error'] = "Identifiants incorrects";
-                header('Location: index.php?action=login');
-                exit;
-            }
-        } else {
+   if ($username === '' || $password === '') {
             $_SESSION['login_error'] = "Veuillez remplir tous les champs.";
             header('Location: index.php?action=login');
             exit;
         }
-    }
+        //cHANGEMENT 4  // On délègue la logique d'authentification au modèle User
+        $user = $this->userModel->login($username, $password);
 
+        if ($user) {
+            // Connexion OK : on enregistre les infos utiles dans la session
+            $_SESSION['user'] = [
+                'id'       => $user['id'] ?? null,
+                'username' => $user['nom_utilisateur'] ?? $username,
+                'role'     => $user['role'] ?? 'admin', // à adapter selon ta BD
+            ];
+            // Changement 6 inactivité 
+
+            $_SESSION['last_activity'] = time();  // heure actuelle en secondes
+
+            // Redirection après connexion 
+            header('Location: index.php?action=dashboard');
+            exit;
+        } else {
+            // Identifiants invalides
+            $_SESSION['login_error'] = "Identifiants incorrects";
+            header('Location: index.php?action=login');
+            exit;
+        }
+    }
+    //Changement 5 
     private function logout() {
-        session_start();
+
+        $_SESSION = [];
         session_destroy();
         header('Location: index.php?action=login');
         exit;
     }
 }
+?>
+
 ?>
