@@ -6,6 +6,10 @@ class FilmController {
     private $filmModel;
 
     public function __construct($db) {
+       if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
         $this->filmModel = new Film($db);
     }
 
@@ -58,19 +62,20 @@ class FilmController {
 
 
     public function dashboard() {
-        if (!isset($_SESSION['admin'])) {
+        if (!isset($_SESSION['user'])) {
             header("Location: index.php?action=login");
             exit;
         }
 
         $films = $this->filmModel->getAllFilms();
+        $nbFilms = count($films);
         require '../app/views/admin_dashboard.php';
     }
 
 
 
     public function liste_films() {
-        if (!isset($_SESSION['admin'])) {
+        if (!isset($_SESSION['user'])) {
             header("Location: index.php?action=login");
             exit;
         }
@@ -94,7 +99,7 @@ class FilmController {
 
 
     public function addFilmForm() {
-        if (!isset($_SESSION['admin'])) {
+        if (!isset($_SESSION['user'])) {
             header("Location: index.php?action=login");
             exit;
         }
@@ -103,19 +108,19 @@ class FilmController {
     }
 
     public function addFilm($post) {
-        if (!isset($_SESSION['admin'])) {
+        if (!isset($_SESSION['user'])) {
             header("Location: index.php?action=login");
             exit;
         }
 
-        $this->filmModel->insertFilm($post);
+        $this->filmModel->addFilm($post);
         header("Location: index.php?action=liste_films");
         exit;
     }
 
 
     public function editFilmForm($id) {
-        if (!isset($_SESSION['admin'])) {
+        if (!isset($_SESSION['user'])) {
             header("Location: index.php?action=login");
             exit;
         }
@@ -126,7 +131,7 @@ class FilmController {
     }
 
     public function updateFilm($id, $post) {
-        if (!isset($_SESSION['admin'])) {
+        if (!isset($_SESSION['user'])) {
             header("Location: index.php?action=login");
             exit;
         }
@@ -136,7 +141,7 @@ class FilmController {
         exit;
     }
     public function deleteFilm($id) {
-        if (!isset($_SESSION['admin'])) {
+        if (!isset($_SESSION['user'])) {
             header("Location: index.php?action=login");
             exit;
         }

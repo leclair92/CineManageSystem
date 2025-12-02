@@ -32,16 +32,18 @@
                 </div>   
                 <div class="mb-3">
                         <p class="fw-bold m-0">Genre</p>
-                        <select class="form-select" name="genre" onchange="this.form.submit()">
+                       <select class="form-select" name="genre_id" onchange="this.form.submit()">
                             <option value="">Tous</option>
+
                             <?php foreach ($genres as $genre): ?>
                                 <option 
-                                    value="<?= htmlspecialchars($genre) ?>"
-                                <?= (($_GET['genre'] ?? '') == $genre) ? 'selected' : '' ?>>
-                                    <?= htmlspecialchars($genre) ?>
+                                    value="<?= htmlspecialchars($genre['id']) ?>"
+                                    <?= (($_GET['genre_id'] ?? '') == $genre['id']) ? 'selected' : '' ?>>
+                                    <?= htmlspecialchars($genre['nom']) ?>
                                 </option>
                             <?php endforeach; ?>
                         </select>
+
                 </div>
                 <div class="mb-3 d-flex align-items-end">
                     <a href="?action=accueil" class="btn btn-outline-secondary">
@@ -60,7 +62,7 @@
                         <a style="min-height:300px;" href="?action=show_film&id=<?= $film['id'] ?>">
                             <!--<img src="<?php echo BASE_URL; ?>images/Intouchables.jpg" class="card-img" alt="<?= htmlspecialchars($film['titre']) ?>">-->
                             <div class="card-img-overlay">
-                                <p class="card-category-pill m-0"><?= htmlspecialchars($film['genre']) ?></p>
+                                <p class="card-category-pill m-0"><?= htmlspecialchars($film['genre_nom']) ?></p>
                                 <p class="card-text m-0"><?= htmlspecialchars($film['annee_sortie']) ?></p>
                                 <h5 class="card-title text-white m-0"> <?= htmlspecialchars($film['titre']) ?></h5>
                                 <p class="card-text text-white"><?= htmlspecialchars($film['realisateur']) ?></p>

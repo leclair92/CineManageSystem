@@ -2,7 +2,7 @@
 // tools/hash_test.php
 
 // ⚠️ Tu peux changer ce mot de passe si tu veux
-$password = 'Admin123!';
+$password = 'admin123';
 
 // On génère le hash sécurisé
 $hash = password_hash($password, PASSWORD_DEFAULT);

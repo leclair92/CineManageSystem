@@ -47,7 +47,6 @@ class AuthController {
             $_SESSION['user'] = [
                 'id'       => $user['id'] ?? null,
                 'username' => $user['nom_utilisateur'] ?? $username,
-                'role'     => $user['role'] ?? 'admin', // à adapter selon ta BD
             ];
             // Changement 6 inactivité 
 
@@ -72,6 +71,4 @@ class AuthController {
         exit;
     }
 }
-?>
-
 ?>
