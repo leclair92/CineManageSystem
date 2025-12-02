@@ -7,7 +7,7 @@
         <div class="col-lg-3">
                 <div class="card text-bg-dark h-100">
                     <!--<img src="<?php echo BASE_URL; ?>images/Intouchables.jpg" class="card-img" alt="<?= htmlspecialchars($film['titre']) ?>">-->
-                    <p class="card-category-pill m-0"><?= htmlspecialchars($film['genre']) ?></p>
+                    <p class="card-category-pill m-0"><?= htmlspecialchars($film['genre_nom']) ?></p>
                 </div>    
        </div>
         <div class="col-lg-9">
@@ -35,14 +35,10 @@
                     </li>-->
                 </ul>
 
-<a href="<?php echo BASE_URL; ?>index.php?action=accueil">⬅ Retour</a> <br> 
-<br>
-<h2><?= htmlspecialchars($film['titre']) ?></h2>
-<p><strong>Réalisateur :</strong> <?= htmlspecialchars($film['realisateur']) ?></p>
-<p><strong>Genre :</strong> <?= htmlspecialchars($film['genre_nom']) ?></p>
-<p><strong>Année :</strong> <?= htmlspecialchars($film['annee_sortie']) ?></p>
-<p><strong>Description:</strong>
-<?= htmlspecialchars($film['description']) ?></p>
+
+                    <!-- Informations tab -->
+                  
+                <div class="tab-content bg-white p-4 shadow">
 
                     <!-- Informations tab -->
                     <div class="tab-pane fade show active" id="info" role="tabpanel">
@@ -57,7 +53,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="d-flex justify-content-between border-bottom">
-                                    <p class="fw-bold">Réalisateur</p><p><?= $film['genre'] ?></p>
+                                    <p class="fw-bold">Réalisateur</p><p><?= $film['genre_nom'] ?></p>
                                 </div>                     
                             </div>
                         </div>
@@ -115,6 +111,7 @@
                             </div>
                         </div>
                     </div>-->
+                </div>
                 </div>
             </div>
         </div>

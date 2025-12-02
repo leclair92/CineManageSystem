@@ -11,11 +11,11 @@ class AccueilController {
     public function handle() {
         $recherche = $_GET['rechercheFilm'] ?? null;
         $annee  = $_GET['annee'] ?? null;
-        $genre  = $_GET['genre'] ?? null;
+        $genre_id  = $_GET['genre_id'] ?? null;
 
-        $films  = $this->filmModel->filtrerFilms($recherche, $annee, $genre);
-        $genres = $this->filmModel->getGenres();
-        $annees = $this->filmModel->getAnneeSortie();
+        $films  = $this->filmModel->filtrerFilms($recherche, $annee, $genre_id);
+        $genres = $this->filmModel->getAllGenres();
+        $annees = $this->filmModel->getAllAnneeSortie();
         require __DIR__ . '/../views/accueil.php';
     }
 }

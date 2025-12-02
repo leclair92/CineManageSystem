@@ -2,7 +2,7 @@
 
 $dbConfig = [
     'hote' => 'localhost',
-    'nomBD' => 'cinemanage',
+    'nomBD' => 'cinemanage_db',
     'nomUtilisateur' => 'root',
     'motDePasse' => ''
 ];
