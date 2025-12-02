@@ -9,7 +9,13 @@ class AccueilController {
     }
 
     public function handle() {
-        $films = $this->filmModel->getAllFilms();
+        $recherche = $_GET['rechercheFilm'] ?? null;
+        $annee  = $_GET['annee'] ?? null;
+        $genre_id  = $_GET['genre_id'] ?? null;
+
+        $films  = $this->filmModel->filtrerFilms($recherche, $annee, $genre_id);
+        $genres = $this->filmModel->getAllGenres();
+        $annees = $this->filmModel->getAllAnneeSortie();
         require __DIR__ . '/../views/accueil.php';
     }
 }
