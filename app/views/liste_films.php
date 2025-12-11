@@ -28,7 +28,7 @@
                     </tr>
                 <?php endforeach; ?>
             </table>
-                 <a href="index.php?action=add_film" class="btn btn-secondary"><i class="bi bi-plus text-primary"s></i> Ajouter un film</a>
+                 <a href="index.php?action=add_film" class="btn btn-secondary"><i class="bi bi-plus text-primary"></i> Ajouter un film</a>
         </div>
     </div>
 </div>

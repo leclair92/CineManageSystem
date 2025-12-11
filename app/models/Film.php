@@ -25,7 +25,7 @@ class Film {
     }
 
     public function addFilm($data) {
-        //$affiche = $data['photo'] ?? null;
+        $affiche = $data['photo'] ?? null;
 
         $stmt = $this->db->prepare("
         INSERT INTO films (titre, realisateur, genre_id, annee_sortie, description) 
@@ -38,20 +38,21 @@ class Film {
         ':genre_id' => $data['genre_id'],
         ':annee_sortie' => $data['annee_sortie'],
         ':description' => $data['description'],
-        //':affiche_film' => $affiche
+        ':affiche_film' => $affiche
         ]);
         return $this->db->lastInsertId();
     }
     public function updateFilm($id, $data) {
   
-        //$affiche = $data['photo'] ?? $data['ancienne_photo'] ?? null;
+        $affiche = $data['photo'] ?? $data['ancienne_photo'] ?? null;
 
         $stmt = $this->db->prepare("  UPDATE films
             SET titre = :titre,
                 realisateur = :realisateur,
                 genre_id = :genre_id,
                 annee_sortie = :annee_sortie,
-                description = :description
+                description = :description,
+                affiche_film = :affiche_film
             WHERE id = :id
         ");
 
@@ -61,7 +62,7 @@ class Film {
         ':genre_id'     => $data['genre_id'],
         ':annee_sortie' => $data['annee_sortie'],
         ':description' => $data['description'],
-        //':affiche_film' => $affiche,
+        ':affiche_film' => $affiche,
         ':id' => $id
         ]);
     }
@@ -70,7 +71,7 @@ class Film {
         return $stmt->execute([':id' => $id]);
     }
     public function getAllAnneeSortie() {
-        $stmt = $this->db->prepare(" SELECT DISTINCT annee_sortie FROM films ORDER BY annee_sortie ASC");
+        $stmt = $this->db->prepare("SELECT DISTINCT annee_sortie FROM films ORDER BY annee_sortie ASC");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }

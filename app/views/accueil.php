@@ -1,12 +1,65 @@
 <?php require __DIR__ . '/layouts/header.php'; ?>
-<div class="container py-5" data-bs-theme="light">
+
+
+<div id="carouselFilms" class="carousel slide bg-dark" data-bs-ride="carousel">
+
+  <!-- Indicateurs (petits points) -->
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselFilms" data-bs-slide-to="0" class="active"></button>
+    <button type="button" data-bs-target="#carouselFilms" data-bs-slide-to="1"></button>
+    <button type="button" data-bs-target="#carouselFilms" data-bs-slide-to="2"></button>
+  </div>
+
+  <!-- Slides -->
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+        
+     <img src="<?php echo BASE_URL; ?>images/slider-film-1.jpg" class="d-block w-100" alt="Rebelle">
+      <div class="carousel-caption d-none d-md-block">
+        <p class="h2">Rebelle</h5>
+        <p class="lead">À l'affiche le 17 décembre 2025</p>
+      </div>
+    </div>
+
+    <div class="carousel-item">
+   <img src="<?php echo BASE_URL; ?>images/slider-film-2.jpg" class="d-block w-100" alt="Rebelle">
+      <div class="carousel-caption d-none d-md-block">
+      <p class="h2">Avatar</h5>
+        <p class="lead">À l'affiche le 2 janvier 2026</p>
+      </div>
+    </div>
+
+    <div class="carousel-item">
+        <img src="<?php echo BASE_URL; ?>images/slider-film-3.jpg" class="d-block w-100" alt="Rebelle">
+      <div class="carousel-caption d-none d-md-block">
+        <p class="h2">Pirates des caraïbes</h5>
+        <p class="lead">À l'affiche le 5 février 2026</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Flèches -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselFilms" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselFilms" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+
+</div>
+
+
+
+
+<div class="container py-5" data-bs-theme="light" id="listing">
 
     <div class="row align-items-center">
         <div class="col-lg-6">
                 <h1 class="h2 text-uppercase">Découvrir les films <br><span style="color:var(--bs-primary);"> à l'affiche</span></h1>
         </div>
         <div class="col-lg-6">   
-            <form class="d-flex gap-2 justify-content-end" method="GET" action="">
+            <form class="d-flex gap-2 justify-content-end" method="GET" action="#listing">
                 <div class="mb-3">
                     <label for="rechercheFilm" class="form-label mb-0 fw-bold"> Recherche</label>
                     <div class="input-group">
@@ -46,7 +99,7 @@
 
                 </div>
                 <div class="mb-3 d-flex align-items-end">
-                    <a href="?action=accueil" class="btn btn-outline-secondary">
+                    <a href="?action=accueil#listing" class="btn btn-outline-secondary">
                         Réinitialiser
                     </a>
                 </div>
@@ -60,7 +113,7 @@
                 <div class="col-lg-3 text-center pb-4">
                     <div class="card text-bg-dark">
                         <a style="min-height:300px;" href="?action=show_film&id=<?= $film['id'] ?>">
-                            <!--<img src="<?php echo BASE_URL; ?>images/Intouchables.jpg" class="card-img" alt="<?= htmlspecialchars($film['titre']) ?>">-->
+                           <img src="<?php echo BASE_URL; ?>images/Intouchables.jpg" class="card-img" alt="<?= htmlspecialchars($film['titre']) ?>">
                             <div class="card-img-overlay">
                                 <p class="card-category-pill m-0"><?= htmlspecialchars($film['genre_nom']) ?></p>
                                 <p class="card-text m-0"><?= htmlspecialchars($film['annee_sortie']) ?></p>
@@ -76,7 +129,7 @@
         <?php else: ?>
         <div class="text-center py-5">
             <p>Aucun film trouvé avec ces critères.</p>
-            <a href="?action=accueil" class="btn btn-outline-secondary">Recommencer la recherche</a>
+            <a href="?action=accueil#listing" class="btn btn-outline-secondary">Recommencer la recherche</a>
         </div>
     <?php endif; ?>
 </div>

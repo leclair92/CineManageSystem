@@ -279,6 +279,12 @@ form button:hover {
     background-color: var(--bs-primary);
 }
 
+label.required:after {
+    content: " *";
+    color: red;
+}
+
+
 /* ========== Tabs ========== */
 
 .tab-content{
@@ -352,6 +358,46 @@ a {
     font-size:14px;
     color:#4d4d4d;
 }
+/* ========== Carroussel ========== */
+
+#carouselFilms img{
+max-height:450px;
+object-fit:cover;
+object-position:center;
+}
+.carousel-control-prev, 
+.carousel-control-next {
+    width: 45px;        /* largeur du rond */
+    height: 45px;       /* hauteur du rond */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-size: 50%, 50%;
+}
+
+.carousel-control-prev{
+    left:21px;
+}
+.carousel-control-next{
+    right:21px;
+}
+.carousel-control-prev,
+.carousel-control-next {
+    background-color: rgba(17, 47, 72,0.9); /* fond noir semi-transparent */
+    border-radius: 50%;                /* forme ronde */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    background-color: rgba(17, 47, 72,1); /* hover plus foncé */
+}
+
 
 /* ========== Responsive ========== */
 @media (max-width: 768px) {

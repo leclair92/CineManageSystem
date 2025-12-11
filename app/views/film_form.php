@@ -26,7 +26,7 @@
                         required><br>
 
                     <label>Genre :</label><br>
-                    <select name="genre_id" required>
+                    <select name="genre_id" class="form-select" required>
                         <option value="">-- Sélectionner un genre --</option>
                         <?php foreach ($genres as $g): ?>
                             <option value="<?= $g['id'] ?>"
@@ -43,7 +43,7 @@
 
                     <label>Description :</label>
                     <textarea name="description" rows="4"><?= isset($film['description']) ? htmlspecialchars($film['description']) : '' ?></textarea><br>
-                    <!--
+     
             <label>Affiche du film :</label>
             <input type="file" name="photo" accept="image/*"><br>
 
@@ -51,7 +51,7 @@
                 <img src="uploads/<?= htmlspecialchars($film['affiche_film']) ?>" width="100">
                 <input type="hidden" name="ancienne_photo" value="<?= htmlspecialchars($film['affiche_film']) ?>">
             <?php endif; ?>
-            -->
+        
                     <br>
 
                     <button type="submit" class="btn btn-primary">
