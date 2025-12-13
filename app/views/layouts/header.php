@@ -16,8 +16,6 @@
    
     <!-- Custom styles -->
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>css/style.css">
-    <!-- Custom script -->
-    <script src="<?php echo BASE_URL; ?>js/script.js"></script>
     <!-- icon font -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <!-- Font --> 
@@ -50,9 +48,9 @@
                     <li class="nav-item"><a href="?action=accueil" class="nav-link active" aria-current="page">Films à l'affiche</a></li> 
                     
                     <?php if (isset($_SESSION['user'])): ?>
-                        <li class="nav-item"><a href="?action=dashboard" class="fw-bold text-uppercase p-2"><i class="bi bi-person-fill"></i><?= htmlspecialchars($_SESSION['user']['username']) ?></a></li> 
-                        <li class="nav-item"><a class="btn btn-primary w-100" href="index.php?action=logout">Déconnexion</a></li> 
-                    <?php else: ?>
+                        <li class="nav-item"><a href="?action=dashboard" class="fw-bold text-uppercase p-2 fw-bold"><i class="bi bi-person-fill text-primary"></i><strong> <?= htmlspecialchars($_SESSION['user']['username']) ?></strong></a></li> 
+                   <div class="p-3"><a class="btn btn-primary" href="index.php?action=logout">Déconnexion</a> </div>
+                        <?php else: ?>
                         <li class="nav-item"><a href="?action=inscription" type="button" class="btn btn-outline-secondary me-2">Inscription</a></li>
                         <li class="nav-item"><a href="?action=login" type="button" class="btn btn-primary">Connexion</a></li> 
                     <?php endif; ?>

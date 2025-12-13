@@ -90,5 +90,7 @@
         </div>
     </div>
 </footer>
+    <!-- Custom script -->
+    <script src="<?php echo BASE_URL; ?>js/script.js"></script>
 </body>
 </html>

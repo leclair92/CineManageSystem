@@ -3,14 +3,12 @@
 
 <div id="carouselFilms" class="carousel slide bg-dark" data-bs-ride="carousel">
 
-  <!-- Indicateurs (petits points) -->
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carouselFilms" data-bs-slide-to="0" class="active"></button>
     <button type="button" data-bs-target="#carouselFilms" data-bs-slide-to="1"></button>
     <button type="button" data-bs-target="#carouselFilms" data-bs-slide-to="2"></button>
   </div>
 
-  <!-- Slides -->
   <div class="carousel-inner">
     <div class="carousel-item active">
         
@@ -38,7 +36,6 @@
     </div>
   </div>
 
-  <!-- Flèches -->
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselFilms" data-bs-slide="prev">
     <span class="carousel-control-prev-icon"></span>
   </button>

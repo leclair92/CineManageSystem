@@ -62,8 +62,9 @@
                 <div class="tab-pane fade" id="horaire" role="tabpanel">
 
                         <div class="row g-3">
-
+                        
                             <div class="col-md-6">
+                                <?php foreach($seances as $seance): ?>
                                 <div class="date-box-wrap d-flex align-items-center bg-secondary">
                                     <div class="date-box">
                                         <div class="date">16</div>
@@ -74,6 +75,7 @@
                                         <div class="hour-list">10h00 | 12h05 | 21h45</div>
                                     </div>
                                 </div>
+                               <?php endforeach ?>
                                 <div class="date-box-wrap d-flex align-items-center bg-secondary mt-3">
                                     <div class="date-box">
                                         <div class="date">17</div>
@@ -85,7 +87,7 @@
                                     </div>
                                 </div>
                             </div>
-
+             
                             <div class="col-md-6">
                                 <div class="date-box-wrap d-flex align-items-center bg-secondary">
                                     <div class="date-box">

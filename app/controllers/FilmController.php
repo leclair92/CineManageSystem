@@ -1,9 +1,16 @@
 <?php
 require_once '../app/models/Film.php';
+require_once '../app/models/Salle.php';
+require_once '../app/models/Seance.php';
+require_once '../app/models/User.php';
+
 
 class FilmController {
 
     private $filmModel;
+    private $seanceModel;
+    private $salleModel;
+    private $userModel;
 
     public function __construct($db) {
        if (session_status() === PHP_SESSION_NONE) {
@@ -11,6 +18,9 @@ class FilmController {
         }
 
         $this->filmModel = new Film($db);
+        $this->seanceModel = new Seance($db);
+        $this->salleModel = new Salle($db);
+        $this->userModel = new User($db);
     }
 
     public function handle($get) {
@@ -60,17 +70,26 @@ class FilmController {
         }
     }
 
-
-    public function dashboard() {
-        if (!isset($_SESSION['user'])) {
-            header("Location: index.php?action=login");
-            exit;
-        }
-
-        $films = $this->filmModel->getAllFilms();
-        $nbFilms = count($films);
-        require '../app/views/admin_dashboard.php';
+public function dashboard() {
+    if (!isset($_SESSION['user'])) {
+        header("Location: index.php?action=login");
+        exit;
     }
+
+    $films = $this->filmModel->getAllFilms();
+    $nbFilms = count($films);
+
+    $seances = $this->seanceModel->getAllSeances();
+    $nbSeance = count($seances);
+
+    $salles = $this->salleModel->getAllSalles();
+    $nbSalles = count($salles);
+
+    $users = $this->userModel->getAllUsers();
+    $nbSutilisateurs = count($users);
+
+    require '../app/views/admin_dashboard.php';
+}
 
 
 

@@ -10,3 +10,14 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+function dateAujourdhui() {
+    return new Date().toLocaleDateString('fr-FR', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+    });
+}
+
+document.querySelectorAll('.date-aujourdhui').forEach(el => {
+    el.textContent = dateAujourdhui();
+});

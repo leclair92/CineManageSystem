@@ -8,8 +8,9 @@
         <div class="col-lg-9 p-4 admin-dash">
             <div>
                 <?php if (isset($erreur)) { ?>
-                    <div style="color:red"><?= htmlspecialchars($erreur) ?></div>
+                    <p class="alert alert-danger error-message p-2 text-secondary text-center" role="alert"><?= htmlspecialchars($erreur) ?></p>
                 <?php } ?>
+                <a href="?action=liste_films"><i class="bi bi-arrow-left-circle-fill"></i> Retour</a>
 
                 <h1><?= isset($film) ? "Modifier le film" : "Ajouter un film" ?></h1>
 
