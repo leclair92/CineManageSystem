@@ -49,7 +49,7 @@ class Salle {
         ]);
     }
     public function deleteSalle($id) {
-        $stmt = $this->db->prepare("DELETE FROM salle WHERE id = :id");
+        $stmt = $this->db->prepare("DELETE FROM salles WHERE id = :id");
         return $stmt->execute([':id' => $id]);
     }
   

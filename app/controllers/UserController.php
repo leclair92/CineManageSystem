@@ -16,7 +16,7 @@ class UserController {
 
     public function handle($get) {
 
-        $action = $get['action'] ?? 'liste_user';
+        $action = $get['action'] ?? 'liste_utilisateurs';
 
         switch ($action) {
 
@@ -24,7 +24,7 @@ class UserController {
                 $this->dashboard();
                 break;
 
-            case 'liste_user':
+            case 'liste_utilisateurs':
                 $this->liste_users();
                 break;
 
@@ -83,7 +83,7 @@ public function dashboard() {
         }
 
         $users = $this->userModel->getAllUsers();
-        require '../app/views/liste_user.php';
+        require '../app/views/liste_utilisateurs.php';
     }
 
 
@@ -105,7 +105,7 @@ public function dashboard() {
             header("Location: index.php?action=login");
             exit;
         }
-        require '../app/views/user_form.php';
+        require '../app/views/utilisateur_form.php';
     }
 
     public function addUser($post) {
@@ -115,7 +115,7 @@ public function dashboard() {
         }
 
         $this->userModel->addUser($post);
-        header("Location: index.php?action=liste_user");
+        header("Location: index.php?action=liste_utilisteurs");
         exit;
     }
 
@@ -127,7 +127,7 @@ public function dashboard() {
         }
 
         $user = $this->userModel->getUserById($id);
-        require '../app/views/user_form.php';
+        require '../app/views/utilisateur_form.php';
     }
 
     public function updateUser($id, $post) {
@@ -137,7 +137,7 @@ public function dashboard() {
         }
 
         $this->userModel->updateUser($id, $post);
-        header("Location: index.php?action=liste_users");
+        header("Location: index.php?action=liste_utilisateurs");
         exit;
     }
     public function deleteUser($id) {
@@ -148,7 +148,7 @@ public function dashboard() {
 
         $this->userModel->deleteUser($id);
 
-        header("Location: index.php?action=liste_users");
+        header("Location: index.php?action=liste_utilisateurs");
         exit;
     }
 }

@@ -36,7 +36,7 @@ switch ($action) {
         $controller = new FilmController($db);
         break;
 
-    case 'liste_users':   
+    case 'liste_utilisateurs':   
     case 'add_user':
     case 'edit_user':
     case 'show_user':

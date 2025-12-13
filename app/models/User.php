@@ -39,8 +39,8 @@ class User {
 
     public function getUserById($id) {
         $stmt = $this->db->prepare("  
-        SELECT * FROM users
-            WHERE users.id = :id");
+        SELECT * FROM administrateurs
+            WHERE administrateurs.id = :id");
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -48,7 +48,7 @@ class User {
 
     public function addUser($data) {
         $stmt = $this->db->prepare("
-        INSERT INTO users (nom_utilisateur, mot_de_passe)
+        INSERT INTO administrateur (nom_utilisateur, mot_de_passe)
         ");
 
         $stmt->execute([
@@ -60,7 +60,7 @@ class User {
     public function updateUser($id, $data) {
   
         $stmt = $this->db->prepare("  
-        UPDATE users
+        UPDATE administrateur
             SET nom_utilisateur = :nom_utilisateur,
                 mot_de_passe = :mot_de_passe,
             WHERE id = :id
@@ -73,7 +73,7 @@ class User {
         ]);
     }
     public function deleteUser($id) {
-        $stmt = $this->db->prepare("DELETE FROM users WHERE id = :id");
+        $stmt = $this->db->prepare("DELETE FROM administrateurs WHERE id = :id");
         return $stmt->execute([':id' => $id]);
     }
    
