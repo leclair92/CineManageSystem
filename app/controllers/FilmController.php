@@ -86,7 +86,7 @@ public function dashboard() {
     $nbSalles = count($salles);
 
     $users = $this->userModel->getAllUsers();
-    $nbSutilisateurs = count($users);
+    $nbUsers = count($users);
 
     require '../app/views/admin_dashboard.php';
 }
@@ -112,6 +112,7 @@ public function dashboard() {
             require '../app/views/404.php';
             return;
         }
+       $seances = $this->seanceModel->getSeancesByFilm($id);
 
         require '../app/views/film_details.php';
     }
@@ -131,8 +132,12 @@ public function dashboard() {
             header("Location: index.php?action=login");
             exit;
         }
+        $data = $post;
+        $data['photo'] = $_FILES['photo'] ?? null;
+        $data['created_by'] = $_SESSION['user']['id'];
 
-        $this->filmModel->addFilm($post);
+    $this->filmModel->addFilm($data);
+
         header("Location: index.php?action=liste_films");
         exit;
     }
@@ -154,8 +159,9 @@ public function dashboard() {
             header("Location: index.php?action=login");
             exit;
         }
-
-        $this->filmModel->updateFilm($id, $post);
+  $data = $post;
+    $data['photo'] = $_FILES['photo'] ?? null;
+        $this->filmModel->updateFilm($id, $data);
         header("Location: index.php?action=liste_films");
         exit;
     }

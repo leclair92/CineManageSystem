@@ -1,3 +1,7 @@
+<?php $role = $_SESSION['user']['role']?? null; 
+ $nom = $_SESSION['user']['nom']?? null; 
+
+?>
 <?php require __DIR__ . '/layouts/header.php'; ?>
 <div class="container py-5" data-bs-theme="light">
     <div class="row bg-white" style="border-radius:0.5em">
@@ -8,12 +12,16 @@
         <div class="col-lg-9 p-4 admin-dash">
             <div class="row">
                 <div class="col-lg-6">
-                    <h1 class="h2 mt-0">Dashboard Admin</h1>
+                    <h1 class="h2 mt-0">     
+                        <?php if (isset($_SESSION['user'])): ?>
+                        Bienvenue <span class="text-primary"> <?= htmlspecialchars($nom) ?></span> </h1>
+                        <?php endif; ?>
                 </div>
                 <div class="col-lg-6 d-flex gap-2 align-items-center justify-content-end">
                     <p class="h4"> <i class="bi bi-calendar text-primary"></i> <span class="date-aujourdhui"></span></p>
                 </div>
             </div>
+            <?php if ($role === 'admin'): ?>
             <div class="row mt-4">
                 <div class="col-lg-3">
                     <div class="p-4 text-center shadow-sm" style="background:#e9f3ff; border-radius:12px;">
@@ -60,17 +68,17 @@
                 <div class="col-lg-3">
                     <div class="p-4 text-center shadow-sm" style="background:#e9f3ff; border-radius:12px;">
                         <h2 class="fw-bold mb-0" style="color:#ff9900; font-size:2.5rem;">
-                            <?= $nbSutilisateurs ?>
+                            <?= $nbUsers ?>
                         </h2>
                         <p class="text-uppercase fw-bold m-0">Utilisateurs</p>
 
-                        <a href="?action=liste_utilisateurs" class="btn btn-sm btn-secondary w-100 mt-2">
+                        <a href="?action=users" class="btn btn-sm btn-secondary w-100 mt-2">
                           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="var(--bs-primary)"><path d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Z"></path></svg> Gérer
                         </a>
                     </div>
                 </div>
             </div>
-
+            <?php endif; ?>
         </div>
     </div>
 </div>

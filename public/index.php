@@ -1,6 +1,8 @@
 <?php
-error_reporting(E_ALL);
 ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 session_start();
 
 require_once('../config/db.php');
@@ -11,7 +13,7 @@ require_once('../app/controllers/AuthController.php');
 require_once('../app/controllers/FilmController.php');
 require_once('../app/controllers/SeanceController.php');
 require_once('../app/controllers/SalleController.php');
-require_once('../app/controllers/UserController.php');
+require_once('../app/controllers/UsersController.php');
 
 $action = $_GET['action'] ?? 'accueil';
 $controller = null;
@@ -36,13 +38,12 @@ switch ($action) {
         $controller = new FilmController($db);
         break;
 
-    case 'liste_utilisateurs':   
-    case 'add_user':
-    case 'edit_user':
-    case 'show_user':
-    case 'delete_user':
-    case 'dashboard':
-        $controller = new userController($db);
+    case 'users':   
+    case 'user_create':
+    case 'user_edit':
+    case 'user_delete':
+    case 'inscription':
+        $controller = new UsersController($db);
         break;
 
     case 'liste_seances':   
@@ -60,18 +61,17 @@ switch ($action) {
     case 'delete_salle':
         $controller = new SalleController($db);
         break;
+    
 
     default:
         http_response_code(404);
         require '../app/views/404.php';
         exit;
 }
+$controller->handle($_GET);
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && $controller instanceof AuthController) {
-    $controller->handlePost($_GET, $_POST);
-} else {
-    $controller->handle($_GET);
-}
+
+
 
 
 ?>

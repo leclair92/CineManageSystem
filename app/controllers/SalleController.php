@@ -15,7 +15,7 @@ class SalleController {
 
     public function handle($get) {
 
-        $action = $get['action'] ?? 'liste_salle';
+        $action = $get['action'] ?? 'liste_salles';
 
         switch ($action) {
 
@@ -68,7 +68,6 @@ class SalleController {
         }
 
         $salle = $this->salleModel->getAllSalles();
-        $nbSalle = count($salle);
         require '../app/views/admin_dashboard.php';
     }
 
@@ -113,10 +112,19 @@ class SalleController {
             exit;
         }
 
-        $this->salleModel->addSalle($post);
-        header("Location: index.php?action=liste_salles");
-        exit;
-    }
+    $data = [
+        'nom'        => $post['nom'] ?? '',
+        'capacite'   => $post['capacite'] ?? 0,
+        'type'       => $post['type'] ?? '',
+        'created_by' => $_SESSION['user']['id'] 
+    ];
+
+    $this->salleModel->addSalle($data);
+
+    header("Location: index.php?action=liste_salles");
+    exit;
+}
+
 
 
     public function editSalleForm($id) {

@@ -36,7 +36,7 @@
             </div>
             <div class="col-lg-4 text-center text-lg-start">
                 <ul class="nav flex-column"> 
-                    <li class="nav-item"><a href="?action=accueil" class="nav-link">Films à l'affiche</a></li>
+                    <li class="nav-item"><a href="?action=accueil#listing" class="nav-link">Films à l'affiche</a></li>
                     <li class="nav-item"><a href="?action=inscription" class="nav-link">Inscription</a></li>
                     <li class="nav-item"><a href="?action=login" class="nav-link">Connexion</a></li> 
                 </ul>

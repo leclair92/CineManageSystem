@@ -44,6 +44,7 @@
     box-sizing: border-box;
 }
 
+
 body {
     font-family: var(--primary-font);
     background: var(--gradiant-soft-blue);

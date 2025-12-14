@@ -17,13 +17,13 @@
 
                 <?php foreach ($salles as $salle) : ?>
                     <tr>
-                        <td><span class="fw-bold"><?= htmlspecialchars($salle['nom']) ?></span></td>
+                        <td><a href="?action=edit_salle&id=<?= $salle['id'] ?>" target="_blank"><span class="fw-bold"><?= htmlspecialchars($salle['nom']) ?></span></a></td>
                          <td><?= htmlspecialchars($salle['capacite']) ?></td>
                          <td><?= htmlspecialchars($salle['type']) ?></td>
                         <td class="text-end">
                             <a href="?action=edit_salle&id=<?= $salle['id'] ?>"><i class="bi bi-pencil-square" style="font-size: 1.3rem;"></i></a>
                             &nbsp;<a href="?action=delete_salle&id=<?= $salle['id'] ?>"
-                            onclick="return confirm('Supprimer ?')"><i class="bi bi-trash3-fill" style="font-size: 1.3rem;"></i></a>
+                            onclick="return confirm('Voulez-vous vraiment supprimer cette salle ? ?')"><i class="bi bi-trash3-fill" style="font-size: 1.3rem;"></i></a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

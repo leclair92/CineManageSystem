@@ -1,15 +1,24 @@
 <?php require __DIR__ . '/layouts/header.php'; ?>
+
+
 <div class="container py-5" data-bs-theme="light">
     <div class="py-3">
-        <a href="?action=accueil" class="btn-link text-uppercase fw-bold"><i class="bi bi-arrow-left-circle-fill"></i> Retour</a> <br> 
+        <a href="?action=accueil#listing" class="text-uppercase fw-bold h5"><i class="bi bi-arrow-left-circle-fill"></i> Retour</a> <br>
     </div>
     <div class="row">
         <div class="col-lg-3">
-                <div class="card text-bg-dark h-100">
-                    <img src="<?= htmlspecialchars($film['photo']) ?>" class="card-img" alt="<?= htmlspecialchars($film['titre']) ?>">
-                    <p class="card-category-pill m-0"><?= htmlspecialchars($film['genre_nom']) ?></p>
-                </div>    
-       </div>
+            <div class="card text-bg-dark h-100">
+                <?php
+                $afficheUrl = !empty($film['affiche_film']) ? '/CineManageSystem/public/images/' . $film['affiche_film'] : '/CineManageSystem/public/images/default.jpg';
+                ?>
+
+                <img src="<?= htmlspecialchars($afficheUrl) ?>"
+                    class="card-img"
+                    alt="<?= htmlspecialchars($film['titre']) ?>">
+
+                <p class="card-category-pill m-0"><?= htmlspecialchars($film['genre_nom']) ?></p>
+            </div>
+        </div>
         <div class="col-lg-9">
             <div class="row">
                 <div class="col-lg-9">
@@ -21,7 +30,6 @@
                 </div>
             </div>
             <div class="row pt-3">
-                <!-- Tabs -->
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active" id="info-tab" data-bs-toggle="tab" data-bs-target="#info" type="button">
@@ -34,89 +42,57 @@
                         </button>
                     </li>
                 </ul>
-
-
-                    <!-- Informations tab -->
-                  
                 <div class="tab-content bg-white p-4 shadow">
-
-                    <!-- Informations tab -->
                     <div class="tab-pane fade show active" id="info" role="tabpanel">
                         <div class="row g-5">
                             <div class="col-lg-6">
                                 <div class="d-flex justify-content-between border-bottom">
-                                    <p class="fw-bold">Année de sortie</p><p><?= $film['annee_sortie'] ?></p>
+                                    <p class="fw-bold">Année de sortie</p>
+                                    <p><?= $film['annee_sortie'] ?></p>
                                 </div>
                                 <div class="d-flex justify-content-between border-bottom mt-3">
-                                    <p class="fw-bold">Réalisateur</p><p><?= $film['realisateur'] ?></p>
+                                    <p class="fw-bold">Réalisateur</p>
+                                    <p><?= $film['realisateur'] ?></p>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="d-flex justify-content-between border-bottom">
-                                    <p class="fw-bold">Réalisateur</p><p><?= $film['genre_nom'] ?></p>
-                                </div>                     
+                                    <p class="fw-bold">Genre</p>
+                                    <p><?= $film['genre_nom'] ?></p>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-                <div class="tab-pane fade" id="horaire" role="tabpanel">
-
+                    <div class="tab-pane fade" id="horaire" role="tabpanel">
                         <div class="row g-3">
-                        
-                            <div class="col-md-6">
-                                <?php foreach($seances as $seance): ?>
-                                <div class="date-box-wrap d-flex align-items-center bg-secondary">
-                                    <div class="date-box">
-                                        <div class="date">16</div>
-                                        <div class="month">NOV</div>
-                                    </div>
-                                    <div class="schedule-card flex-grow-1">
-                                        <strong>Salle 1</strong>
-                                        <div class="hour-list">10h00 | 12h05 | 21h45</div>
-                                    </div>
-                                </div>
-                               <?php endforeach ?>
-                                <div class="date-box-wrap d-flex align-items-center bg-secondary mt-3">
-                                    <div class="date-box">
-                                        <div class="date">17</div>
-                                        <div class="month">NOV</div>
-                                    </div>
-                                    <div class="schedule-card flex-grow-1">
-                                        <strong>Salle 2</strong>
-                                        <div class="hour-list">10h00 | 12h05 | 21h45</div>
-                                    </div>
-                                </div>
+              
+                                <?php foreach ($seances as $seance): ?>
+                                                <div class="col-md-6">
+                                    <?php
+                                        $date = date('d', strtotime($seance['date_heure']));
+                                        $mois = date('M', strtotime($seance['date_heure']));
+                                        $heure = date('H\hi', strtotime($seance['date_heure']));
+                                        ?>
+                    <div class="date-box-wrap d-flex align-items-center bg-secondary mb-3">
+                            <div class="date-box text-center me-3">
+                                <div class="date"><?= $date ?></div>
+                                <div class="month"><?= strtoupper($mois) ?></div>
                             </div>
-             
-                            <div class="col-md-6">
-                                <div class="date-box-wrap d-flex align-items-center bg-secondary">
-                                    <div class="date-box">
-                                        <div class="date">18</div>
-                                        <div class="month">NOV</div>
-                                    </div>
-                                    <div class="schedule-card flex-grow-1">
-                                        <strong>Salle 2</strong>
-                                        <div class="hour-list">10h00 | 12h05 | 21h45</div>
-                                    </div>
-                                </div>
 
-                                <div class="date-box-wrap d-flex align-items-center mt-3 bg-secondary">
-                                    <div class="date-box">
-                                        <div class="date">19</div>
-                                        <div class="month">NOV</div>
-                                    </div>
-                                    <div class="schedule-card flex-grow-1">
-                                        <strong>Salle 3</strong>
-                                        <div class="hour-list">10h00 | 12h05 | 21h45</div>
-                                    </div>
-                                </div>
+                            <div class="schedule-card flex-grow-1">
+                                <strong><?= htmlspecialchars($seance['salle_nom']) ?></strong>
+                                <div class="hour-list"><?= $heure ?></div>
+                            </div>
+                        </div>
+   </div>
+                                <?php endforeach ?>
                             </div>
                         </div>
                     </div>
-                </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 <?php require __DIR__ . '/layouts/footer.php'; ?>

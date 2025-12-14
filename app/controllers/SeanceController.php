@@ -1,13 +1,13 @@
 <?php
 require_once '../app/models/Seance.php';
 require_once '../app/models/Film.php';
-//require_once '../app/models/Salle.php';
+require_once '../app/models/Salle.php';
 
 class SeanceController {
 
     private $seanceModel;
     private $filmModel;
-    //private $salleModel;
+    private $salleModel;
 
     public function __construct($db) {
        if (session_status() === PHP_SESSION_NONE) {
@@ -16,7 +16,7 @@ class SeanceController {
 
         $this->seanceModel = new Seance($db);
         $this->filmModel   = new Film($db);
-        //$this->salleModel  = new Salle($db);
+        $this->salleModel  = new Salle($db);
     }
 
     public function handle($get) {
@@ -109,20 +109,33 @@ class SeanceController {
             header("Location: index.php?action=login");
             exit;
         }
+    $films = $this->filmModel->getAllFilms();
+    $salles = $this->salleModel->getAllSalles();
         
         require '../app/views/seance_form.php';
     }
 
-    public function addSeance($post) {
-        if (!isset($_SESSION['user'])) {
-            header("Location: index.php?action=login");
-            exit;
-        }
+public function addSeance($post) {
 
-        $this->seanceModel->addSeance($post);
-        header("Location: index.php?action=liste_seances");
+    if (!isset($_SESSION['user']['id'])) {
+        header("Location: index.php?action=login");
         exit;
     }
+     $date = str_replace('T', ' ', $post['date_heure']);
+
+    $data = [
+        'film_id'    => $post['film_id'],
+        'salle_id'   => $post['salle_id'],
+        'date_heure' => $date,
+        'created_by' => $_SESSION['user']['id']
+    ];
+
+   $this->seanceModel->addSeance($data);
+
+    header("Location: index.php?action=liste_seances");
+    exit;
+}
+
 
 
     public function editSeanceForm($id) {
@@ -130,8 +143,9 @@ class SeanceController {
             header("Location: index.php?action=login");
             exit;
         }
-
         $seance = $this->seanceModel->getSeanceById($id);
+        $films  = $this->filmModel->getAllFilms();
+        $salles = $this->salleModel->getAllSalles();
         require '../app/views/seance_form.php';
     }
 
@@ -140,8 +154,13 @@ class SeanceController {
             header("Location: index.php?action=login");
             exit;
         }
+          $data = [
+            'film_id'    => (int)$post['film_id'],
+            'salle_id'   => (int)$post['salle_id'],
+            'date_heure' => $post['date_heure']
+        ];
 
-        $this->seanceModel->updateSeance($id, $post);
+        $this->seanceModel->updateSeance($id, $data);
         header("Location: index.php?action=liste_seances");
         exit;
     }

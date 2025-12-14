@@ -45,10 +45,10 @@
         <div class="collapse navbar-collapse" id="navMenu">
 
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center"> 
-                    <li class="nav-item"><a href="?action=accueil" class="nav-link active" aria-current="page">Films à l'affiche</a></li> 
+                    <li class="nav-item"><a href="?action=accueil#listing" class="nav-link active" aria-current="page">Films à l'affiche</a></li> 
                     
                     <?php if (isset($_SESSION['user'])): ?>
-                        <li class="nav-item"><a href="?action=dashboard" class="fw-bold text-uppercase p-2 fw-bold"><i class="bi bi-person-fill text-primary"></i><strong> <?= htmlspecialchars($_SESSION['user']['username']) ?></strong></a></li> 
+                        <li class="nav-item"><a href="?action=dashboard" class="fw-bold text-uppercase p-2 fw-bold"><i class="bi bi-person-fill text-primary"></i><strong> <?= htmlspecialchars($_SESSION['user']['nom']) ?></strong></a></li> 
                    <div class="p-3"><a class="btn btn-primary" href="index.php?action=logout">Déconnexion</a> </div>
                         <?php else: ?>
                         <li class="nav-item"><a href="?action=inscription" type="button" class="btn btn-outline-secondary me-2">Inscription</a></li>

@@ -23,7 +23,7 @@
                         <td class="text-end">
                             <a href="?action=edit_seance&id=<?= $seance['id'] ?>"><i class="bi bi-pencil-square" style="font-size: 1.3rem;"></i></a>
                             &nbsp;<a href="?action=delete_seance&id=<?= $seance['id'] ?>"
-                            onclick="return confirm('Supprimer ?')"><i class="bi bi-trash3-fill" style="font-size: 1.3rem;"></i></a>
+                            onclick="return confirm('Voulez-vous vraiment supprimer cette séance ? ?')"><i class="bi bi-trash3-fill" style="font-size: 1.3rem;"></i></a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

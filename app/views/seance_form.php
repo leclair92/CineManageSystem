@@ -1,6 +1,6 @@
 <?php require __DIR__ . '/layouts/header.php'; ?>
 <div class="container py-5" data-bs-theme="light">
-    <div class="row bg-white" style="border-radius:0.5em">
+    <div class="row bg-white" style="border-radius:0.5em;min-height:500px;">
         <div class="col-lg-3 p-0 bg-secondary admin-dash-menu">
             <?php require __DIR__ . '/layouts/dashboard-menu.php'; ?>
         </div>
@@ -8,45 +8,61 @@
         <div class="col-lg-9 p-4 admin-dash">
             <div>
                 <?php if (isset($erreur)) { ?>
-                     <p class="alert alert-danger error-message p-2 text-secondary text-center" role="alert"><?= htmlspecialchars($erreur) ?></div>
+                     <p class="alert alert-danger error-message p-2 text-secondary text-center" role="alert"><?= htmlspecialchars($erreur) ?></p>
                 <?php } ?>
-                <a href="?action=liste_seances"><i class="bi bi-arrow-left-circle-fill"></i> Retour</a>
-                <h1><?= isset($seance) ? "Modifier la séance" : "Ajouter une séance" ?></h1>
+                      <div class="row align-items-center mb-3">
+                    <div class="col-lg-6"> <a class="h6" href="?action=liste_seances"><i class="bi bi-arrow-left-circle-fill"></i> Retour</a></div>
+                    <div class="col-lg-6 text-end"> <a class="h6" href="?action=delete_seance&id=<?= isset($seance['id']) ?>" onclick="return confirm('Voulez-vous vraiment supprimer cette séance ?')"><i class="bi bi-trash3-fill"></i> Supprimer</a></div>
 
-                <form method="POST" enctype="multipart/form-data">
-                    <label>Film :</label><br>
-                    <select name="film_id" class="form-select" required>
-                        <option value="">-- Sélectionner un film --</option>
-                        <?php foreach ($films as $f): ?>
-                            <option value="<?= $f['id'] ?>"
-                                <?= (isset($film['genre_id']) && $film['genre_id'] == $f['id']) ? 'selected' : '' ?>>
-                                <?= htmlspecialchars($f['nom']) ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
+                </div>
+                <h1><?= isset($seance) ? '' . htmlspecialchars($seance['film_titre']) . '' : "Ajouter une séance" ?></h1>
+               
+          <form method="POST">
+    <div class="mb-3">
+        <label for="film_id">Film</label>
+        <select id="film_id" name="film_id" class="form-select" required>
+            <option value="">Sélectionner un film</option>
+            <?php foreach ($films as $f): ?>
+                <option value="<?= $f['id'] ?>"
+                    <?= (isset($seance) && $seance['film_id'] == $f['id']) ? 'selected' : '' ?>>
+                    <?= htmlspecialchars($f['titre']) ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+    </div>
 
-                    <label>Salle :</label><br>
-                    <select name="salle_id" class="form-select" required>
-                        <option value="">-- Sélectionner une Salle --</option>
-                        <?php foreach ($salles as $salle): ?>
-                            <option value="<?= $s['id'] ?>"
-                                <?= (isset($salle['nom']) && $salle['id'] == $s['id']) ? 'selected' : '' ?>>
-                                <?= htmlspecialchars($s['nom']) ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
+    <div class="mb-3">
+        <label for="salle_id">Salle</label>
+        <select id="salle_id" name="salle_id" class="form-select" required>
+            <option value="">Sélectionner une salle</option>
+            <?php foreach ($salles as $s): ?>
+                <option value="<?= $s['id'] ?>"
+                    <?= (isset($seance) && $seance['salle_id'] == $s['id']) ? 'selected' : '' ?>>
+                    <?= htmlspecialchars($s['nom']) ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+    </div>
 
-                    
-                    <label>Date :</label>
-                    <input type="date" name="date"
-                        value="<?= isset($seance['date']) ? htmlspecialchars($seance['date']) : '' ?>"
-                        required><br>
-      
-                    <button type="submit" class="btn btn-primary">
-                        <?= isset($seance) ? "Enregistrer les changements" : "Ajouter la séance" ?>
-                    </button>
+    <div class="mb-4">
+        <label for="date_heure">Date et heure</label>
+        <input
+            type="datetime-local"
+            id="date_heure"
+            name="date_heure"
+            class="form-control"
+            value="<?= isset($seance['date_heure']) ? date('Y-m-d\TH:i', strtotime($seance['date_heure'])) : '' ?>"
+            required
+        >
+    </div>
 
-                </form>
+    <button type="submit" class="btn btn-secondary">
+        <?= isset($seance)
+            ? "<i class='bi bi-floppy2-fill text-primary'></i> Enregistrer"
+            : "<i class='bi bi-plus text-primary'></i> Ajouter la séance"
+        ?>
+    </button>
+</form>
 
             </div>
         </div>
