@@ -9,6 +9,7 @@
             <h1 class="h2 mt-0">Films</h1>
             <table border="1" class="mb-3">
                 <tr>
+                    <th>Affiche</th>
                     <th>Titre</th>
                     <th>Année</th>
                     <th>Genre</th>
@@ -16,19 +17,36 @@
                 </tr>
 
                 <?php foreach ($films as $film) : ?>
+                    <?php
+                    $afficheUrl = !empty($film['affiche_film']) ? '/CineManageSystem/public/images/' . $film['affiche_film']  : '/CineManageSystem/public/images/default.jpg';
+                    ?>
                     <tr>
-                        <td><span class="fw-bold"><?= htmlspecialchars($film['titre']) ?></span></td>
-                         <td><?= htmlspecialchars($film['annee_sortie']) ?></td>
-                         <td><?= htmlspecialchars($film['genre_nom']) ?></td>
+                        <td style="width:90px;">
+                            <img src="<?= htmlspecialchars($afficheUrl) ?>"
+                                alt="<?= htmlspecialchars($film['titre']) ?>"
+                                style="width:70px; height:auto;"
+                                class="img-thumbnail">
+                        </td>
+
+                        <td><a href="?action=edit_film&id=<?= $film['id'] ?>" target="_blank"><strong><?= htmlspecialchars($film['titre']) ?></a></strong></td>
+                        <td><?= htmlspecialchars($film['annee_sortie']) ?></td>
+                        <td><?= htmlspecialchars($film['genre_nom']) ?></td>
+
                         <td class="text-end">
-                            <a href="?action=edit_film&id=<?= $film['id'] ?>"><i class="bi bi-pencil-square" style="font-size: 1.3rem;"></i></a>
-                            &nbsp;<a href="?action=delete_film&id=<?= $film['id'] ?>"
-                            onclick="return confirm('Supprimer ?')"><i class="bi bi-trash3-fill" style="font-size: 1.3rem;"></i></a>
+                            <a href="?action=edit_film&id=<?= $film['id'] ?>">
+                                <i class="bi bi-pencil-square" style="font-size:1.3rem;"></i>
+                            </a>
+                            &nbsp;
+                            <a href="?action=delete_film&id=<?= $film['id'] ?>"
+                                onclick="return confirm('Voulez-vous vraiment supprimer ce film ?')">
+                                <i class="bi bi-trash3-fill" style="font-size:1.3rem;"></i>
+                            </a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
+
             </table>
-                 <a href="index.php?action=add_film" class="btn btn-secondary"><i class="bi bi-plus text-primary"s></i> Ajouter un film</a>
+            <a href="index.php?action=add_film" class="btn btn-secondary"><i class="bi bi-plus text-primary"></i> Ajouter un film</a>
         </div>
     </div>
 </div>
