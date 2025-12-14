@@ -73,18 +73,18 @@
                                         $mois = date('M', strtotime($seance['date_heure']));
                                         $heure = date('H\hi', strtotime($seance['date_heure']));
                                         ?>
-                    <div class="date-box-wrap d-flex align-items-center bg-secondary mb-3">
-                            <div class="date-box text-center me-3">
-                                <div class="date"><?= $date ?></div>
-                                <div class="month"><?= strtoupper($mois) ?></div>
-                            </div>
+                                <div class="date-box-wrap d-flex align-items-center bg-secondary ">
+                                    <div class="date-box text-center me-3">
+                                        <div class="date"><?= $date ?></div>
+                                        <div class="month"><?= strtoupper($mois) ?></div>
+                                    </div>
 
-                            <div class="schedule-card flex-grow-1">
-                                <strong><?= htmlspecialchars($seance['salle_nom']) ?></strong>
-                                <div class="hour-list"><?= $heure ?></div>
-                            </div>
-                        </div>
-   </div>
+                                    <div class="schedule-card flex-grow-1">
+                                        <strong><?= htmlspecialchars($seance['salle_nom']) ?></strong>
+                                        <div class="hour-list"><?= $heure ?></div>
+                                    </div>
+                                </div>
+                                </div>
                                 <?php endforeach ?>
                             </div>
                         </div>

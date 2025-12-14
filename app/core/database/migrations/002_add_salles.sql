@@ -1,8 +1,0 @@
-CREATE TABLE salles (
-    id INT(11) NOT NULL AUTO_INCREMENT,
-    nom VARCHAR(100) NOT NULL,
-    capacite INT(11) NOT NULL,
-    type VARCHAR(100) NOT NULL,
-    created_by INT(11) NULL,
-    PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

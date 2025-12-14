@@ -22,10 +22,10 @@
         <label for="film_id">Film</label>
         <select id="film_id" name="film_id" class="form-select" required>
             <option value="">Sélectionner un film</option>
-            <?php foreach ($films as $f): ?>
-                <option value="<?= $f['id'] ?>"
-                    <?= (isset($seance) && $seance['film_id'] == $f['id']) ? 'selected' : '' ?>>
-                    <?= htmlspecialchars($f['titre']) ?>
+            <?php foreach ($films as $film): ?>
+                <option value="<?= $film['id'] ?>"
+                    <?= (isset($seance) && $seance['film_id'] == $film['id']) ? 'selected' : '' ?>>
+                    <?= htmlspecialchars($film['titre']) ?>
                 </option>
             <?php endforeach; ?>
         </select>
@@ -35,10 +35,10 @@
         <label for="salle_id">Salle</label>
         <select id="salle_id" name="salle_id" class="form-select" required>
             <option value="">Sélectionner une salle</option>
-            <?php foreach ($salles as $s): ?>
-                <option value="<?= $s['id'] ?>"
-                    <?= (isset($seance) && $seance['salle_id'] == $s['id']) ? 'selected' : '' ?>>
-                    <?= htmlspecialchars($s['nom']) ?>
+            <?php foreach ($salles as $salle): ?>
+                <option value="<?= $salle['id'] ?>"
+                    <?= (isset($seance) && $seance['salle_id'] == $salle['id']) ? 'selected' : '' ?>>
+                    <?= htmlspecialchars($salle['nom']) ?>
                 </option>
             <?php endforeach; ?>
         </select>

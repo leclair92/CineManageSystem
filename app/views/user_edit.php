@@ -8,23 +8,23 @@
         </div>
 
         <div class="col-lg-9 p-4 admin-dash">
-            <h1 class="h2 mt-0 mb-4">Modifier un utilisateur</h1>
+            <h1 class="h2 mt-0 mb-3">Modifier un utilisateur</h1>
 
                     <form action="index.php?action=user_edit&id=<?= $user['id'] ?>" method="post" class="row g-3">
 
-                        <div class="mb-4">
+                        <div class="">
                             <label for="nom" class="form-label">Nom</label>
-                            <input type="text" name="nom" id="nom" class="form-control"
+                            <input type="text" name="nom" id="nom" class="form-control m-0"
                                    value="<?= htmlspecialchars($user['nom']) ?>" required>
                         </div>
 
-                        <div class="mb-4">
+                        <div class="">
                             <label for="courriel" class="form-label">Courriel</label>
-                            <input type="email" name="courriel" id="courriel" class="form-control"
+                            <input type="email" name="courriel" id="courriel" class="form-control m-0"
                                    value="<?= htmlspecialchars($user['courriel']) ?>" required>
                         </div>
 
-                        <div class="mb-4">
+                        <div class="">
                             <label for="role" class="form-label">Rôle</label>
                             <select name="role" id="role" class="form-select">
                                 <option value="user"  <?= $user['role'] === 'user'  ? 'selected' : '' ?>>Utilisateur</option>

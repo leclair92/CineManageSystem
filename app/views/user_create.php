@@ -3,12 +3,10 @@
 <div class="container py-5" data-bs-theme="light">
     <div class="row bg-white" style="border-radius:0.5em;min-height:500px;">
         
-        <!-- MENU -->
         <div class="col-lg-3 p-0 bg-secondary admin-dash-menu">
             <?php require __DIR__ . '/layouts/dashboard-menu.php'; ?>
         </div>
 
-        <!-- CONTENU -->
         <div class="col-lg-9 p-4 admin-dash">
             <div>
 
@@ -34,26 +32,12 @@
 
                     <div class="mb-3">
                         <label for="nom">Nom</label>
-                        <input
-                            type="text"
-                            id="nom"
-                            name="nom"
-                            class="form-control"
-                            value="<?= isset($user['nom']) ? htmlspecialchars($user['nom']) : '' ?>"
-                            required
-                        >
+                        <input type="text" id="nom" name="nom"  class="form-control"  value="<?= isset($user['nom']) ? htmlspecialchars($user['nom']) : '' ?>"  required >
                     </div>
 
                     <div class="mb-3">
                         <label for="courriel">Courriel</label>
-                        <input
-                            type="email"
-                            id="courriel"
-                            name="courriel"
-                            class="form-control"
-                            value="<?= isset($user['courriel']) ? htmlspecialchars($user['courriel']) : '' ?>"
-                            required
-                        >
+                        <input type="email"  id="courriel" name="courriel" class="form-control"  value="<?= isset($user['courriel']) ? htmlspecialchars($user['courriel']) : '' ?>" required >
                     </div>
 
                     <div class="mb-3">
@@ -61,14 +45,7 @@
                             Mot de passe
                             <?= isset($user) ? '(laisser vide pour ne pas changer)' : '' ?>
                         </label>
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            class="form-control"
-                            <?= isset($user) ? '' : 'required' ?>
-                            autocomplete="new-password"
-                        >
+                        <input type="password" id="password" name="password"   class="form-control" <?= isset($user) ? '' : 'required' ?>   autocomplete="new-password" >
                     </div>
 
                     <div class="mb-4">
@@ -86,9 +63,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-secondary">
-                        <?= isset($user)
-                            ? "<i class='bi bi-floppy2-fill text-primary'></i> Enregistrer les changements"
-                            : "<i class='bi bi-plus text-primary'></i> Ajouter l'utilisateur"
+                        <?= isset($user)   ? "<i class='bi bi-floppy2-fill text-primary'></i> Enregistrer les changements"  : "<i class='bi bi-plus text-primary'></i> Ajouter l'utilisateur"
                         ?>
                     </button>
 
