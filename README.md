@@ -6,38 +6,61 @@ cineManageSystem/
 │   │   └── style.css
 │   ├── js/
 │   │   └── script.js
-|   |
-│   │  
+|   | 
 │   └── images/   
 │
 ├── app/
 │   ├── controllers/
+│   │   ├── AccueilController.php
 │   │   ├── AuthController.php
 │   │   ├── FilmController.php
 │   │   ├── SalleController.php
-│   │   └── SeanceController.php
+│   │   ├── SeanceController.php
+│   │   └── UsersController.php
+│   ├── core/
+│   │   ├── helpers.php
+│   │   └── database/
+│   │       ├── db.php
+│   │       ├── migrate.php
+│   │       ├── rollback.php
+│   │       ├── migrations/
+│   │       │   ├── 001_add_seances.sql
+│   │       │   ├── 002_add_salles.sql
+│   │       │   └── 003_add_foreign_keys.sql
+│   │       │
+│   │       └── rollback/
+│   │          ├── 001_add_seances.rollback.sql
+│   │          ├── 002_add_salles.rollback.sql
+│   │          └── 003_add_foreign_keys.rollback.sql
+│   │      
+│   │   
 │   │
 │   ├── models/
-│   │   ├── User.php
 │   │   ├── Film.php
 │   │   ├── Salle.php
-│   │   └── Seance.php
+│   │   ├── Seance.php
+│   │   └── User.php
 │   │
 │   ├── views/
-│   │   ├── accueil.php
-│   │   ├── login.php
-│   │   ├── admin_dashboard.php
-│   │   ├── films_list.php
-│   │   ├── ajout_film.php
-│   │   ├── salles_list.php
-│   │   ├── ajout_salle.php         
-│   │   ├── seances_list.php
-│   │   ├── ajput_seance.php          
 │   │   ├── 404.php
+│   │   ├── accueil.php
+│   │   ├── admin_dashboard.php
+│   │   ├── film_details.php
+│   │   ├── film_form.php
+│   │   ├── inscription.php
+│   │   ├── liste_films.php
+│   │   ├── liste_salles.php
+│   │   ├── liste_seances.php  
+│   │   ├── login.php       
+│   │   ├── salle_form.php
+│   │   ├── seance_form.php  
+│   │   ├── user_create.php
+│   │   ├── user_edit.php
+│   │   ├── users.php
 │   │   └── layouts/
+│   │       ├── dashboard-menu.php
 │   │       ├── header.php
 │   │       └── footer.php
-│
 ├── config/
 │   ├── db.php
 │   └── config.php

@@ -1,33 +1,107 @@
 <?php
 
 class User {
-    private PDO $db;
+    private $db;
 
-    public function __construct(PDO $db) {
+    public function __construct($db) {
         $this->db = $db;
     }
 
-    /**
-     * Authentifie un utilisateur admin à partir de son nom et mot de passe.
-     * Retourne le tableau $user si OK, ou false si échec.
-     */
-    public function login(string $username, string $password) {
-        // On cherche l'utilisateur dans la table administrateurs
-        $sql = "SELECT * FROM administrateurs WHERE nom_utilisateur = :username LIMIT 1";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute([':username' => $username]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    public function getRoles() {
+        return [
+            'user'  => 'Utilisateur',
+            'admin' => 'Administrateur'
+        ];
+    }
 
-        // Si on a trouvé un utilisateur avec un mot de passe
-        if ($user && isset($user['mot_de_passe'])) {
-            // Vérifier le mot de passe fourni avec le hash en BD
-            if (password_verify($password, $user['mot_de_passe'])) {
-                // Succès : on retourne toutes les infos de l'utilisateur
-                return $user;
-            }
-        }
+    public function login($nom, $password) {
 
-        // Échec de l'authentification
-        return false;
+    $stmt = $this->db->prepare("
+        SELECT * FROM users WHERE nom = :nom
+    ");
+
+    $stmt->execute([
+        ':nom' => $nom
+    ]);
+
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user && password_verify($password, $user['password'])) {
+        return $user;
+    }
+
+    return false;
+}
+
+
+    public function getAllUsers() {
+        $stmt = $this->db->query("
+            SELECT * FROM users ORDER BY id DESC
+        ");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getUserById($id) {
+        $stmt = $this->db->prepare("
+            SELECT * FROM users WHERE id = :id
+        ");
+        $stmt->execute([':id' => $id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function addUser($data) {
+
+        $password = password_hash($data['password'], PASSWORD_DEFAULT);
+
+        $stmt = $this->db->prepare("
+            INSERT INTO users (nom, courriel, password, role)
+            VALUES (:nom, :courriel, :password, :role)
+        ");
+
+        return $stmt->execute([
+            ':nom'      => $data['nom'],
+            ':courriel' => $data['courriel'],
+            ':password' => $password,
+            ':role'     => $data['role']
+        ]);
+    }
+
+public function updateUser($id, $data) {
+
+    $stmt = $this->db->prepare("
+        UPDATE users
+        SET nom = :nom,
+            courriel = :courriel,
+            role = :role
+        WHERE id = :id
+    ");
+
+    return $stmt->execute([
+        ':nom'      => $data['nom'],
+        ':courriel' => $data['courriel'],
+        ':role'     => $data['role'],
+        ':id'       => $id
+    ]);
+}
+
+    public function updatePassword($id, $password) {
+
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+
+        $stmt = $this->db->prepare("
+            UPDATE users  SET password = :password  WHERE id = :id
+        ");
+
+        return $stmt->execute([
+            ':password' => $hash,
+            ':id'       => $id
+        ]);
+    }
+
+    public function deleteUser($id) {
+        $stmt = $this->db->prepare("
+            DELETE FROM users WHERE id = :id
+        ");
+        return $stmt->execute([':id' => $id]);
     }
 }
