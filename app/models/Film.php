@@ -114,6 +114,7 @@ public function updateFilm($id, $data) {
     
     public function getAllAnneeSortie() {
         $stmt = $this->db->prepare(" SELECT DISTINCT annee_sortie FROM films ORDER BY annee_sortie ASC");
+        $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
 
@@ -148,5 +149,32 @@ public function updateFilm($id, $data) {
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function filmExiste($titre, $annee_sortie, $realisateur, $excludeId = null){
+        $sql = "SELECT id FROM films 
+            WHERE titre = :titre 
+            AND annee_sortie = :annee_sortie 
+            AND realisateur = :realisateur";
+
+    
+        if ($excludeId !== null) {
+            $sql .= " AND id != :excludeId";
+        }
+
+        $stmt = $this->db->prepare($sql);
+
+        $stmt->bindValue(':titre', $titre);
+        $stmt->bindValue(':annee_sortie', $annee_sortie);
+        $stmt->bindValue(':realisateur', $realisateur);
+
+        if ($excludeId !== null) {
+            $stmt->bindValue(':excludeId', $excludeId, PDO::PARAM_INT);
+        }
+
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC) !== false;
+    }
+
 
 }
