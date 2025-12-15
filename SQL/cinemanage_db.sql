@@ -21,6 +21,13 @@ SET time_zone = "+00:00";
 -- Base de données : cinemanage_db
 --
 
+DROP DATABASE IF EXISTS cinemanage_db;
+
+CREATE DATABASE cinemanage_db
+CHARACTER SET utf8mb4
+COLLATE utf8mb4_general_ci;
+
+USE cinemanage_db;
 
 
 --
