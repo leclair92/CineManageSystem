@@ -7,9 +7,17 @@
 
         <div class="col-lg-9 p-4 admin-dash">
             <div>
-                <?php if (isset($erreur)) { ?>
-                    <p class="alert alert-danger error-message p-2 text-secondary text-center" role="alert"><?= htmlspecialchars($erreur) ?></p>
-                <?php } ?>
+                <?php if (!empty($errors)): ?> 
+                    <div class="alert alert-danger error-message p-2 text-secondary text-center" role="alert">
+                        
+                        <?php foreach ($errors as $e): ?>
+                            <p class="m-0">
+                            <i class="bi bi-exclamation-octagon-fill"></i> <?= htmlspecialchars($e) ?>
+                            </p>
+                        <?php endforeach; ?>
+                        
+                    </div>
+                <?php endif; ?>
                 <div class="row align-items-center mb-3">
                     <div class="col-lg-6"> <a class="h6" href="?action=liste_films"><i class="bi bi-arrow-left-circle-fill"></i> Retour</a></div>
                     <?php if (isset($film['id'])): ?>
@@ -25,34 +33,33 @@
                     <div class="row">
                         <div class="col-lg-8">
                             <label>Titre :</label>
-                            <input type="text" name="titre"
-                                value="<?= isset($film['titre']) ? htmlspecialchars($film['titre']) : '' ?>"
-                                required><br>
+                    <input type="text" name="titre"
+                        value="<?= htmlspecialchars($old['titre'] ?? ($film['titre'] ?? '')) ?>"
+                        required><br>
 
-                            <label>Réalisateur :</label>
-                            <input type="text" name="realisateur"
-                                value="<?= isset($film['realisateur']) ? htmlspecialchars($film['realisateur']) : '' ?>"
-                                required><br>
+                    <label>Réalisateur :</label>
+                    <input type="text" name="realisateur"
+                        value="<?= htmlspecialchars($old['realisateur'] ?? ($film['realisateur'] ?? '')) ?>"
+                        required><br>
 
-                            <label>Genre :</label><br>
-                            <select name="genre_id" class="form-select" required>
-                                <option value="">Sélectionner un genre</option>
-                                <?php foreach ($genres as $genre): ?>
-                                    <option value="<?= $genre['id'] ?>"
-                                        <?= (isset($film['genre_id']) && $film['genre_id'] == $genre['id']) ? 'selected' : '' ?>>
-                                        <?= htmlspecialchars($genre['nom']) ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
-                            <br>
-                            <label>Année de sortie :</label>
-                            <input type="number" name="annee_sortie"
-                                value="<?= isset($film['annee_sortie']) ? $film['annee_sortie'] : '' ?>"
-                                required><br>
+                    <label>Genre :</label><br>
+                    <select class="form-select" name="genre_id" required>
+                        <option value="">-- Sélectionner un genre --</option>
+                        <?php foreach ($genres as $g): ?>
+                            <option value="<?= $g['id'] ?>"
+                                <?= (isset($film['genre_id']) && $film['genre_id'] == $g['id']) ? 'selected' : '' ?>>
+                                <?= htmlspecialchars($g['nom']) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                    <br>
+                    <label>Année de sortie :</label>
+                    <input type="number" name="annee_sortie"
+                        value="<?= htmlspecialchars($old['annee_sortie'] ?? ($film['annee_sortie'] ?? '')) ?>"
+                        required><br>
 
-                            <label>Description :</label>
-                            <textarea name="description" rows="4"><?= isset($film['description']) ? htmlspecialchars($film['description']) : '' ?></textarea><br>
-
+                    <label>Description :</label>
+                    <textarea name="description" rows="4"><?= htmlspecialchars($old['description'] ?? ($film['description'] ?? '')) ?></textarea><br>
                       
                         </div>
                         <div class="col-lg-3">
