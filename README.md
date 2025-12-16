@@ -70,5 +70,9 @@ cineManageSystem/
 │
 └── README.md
 
-https://docs.google.com/document/d/18GH0G51sDctoWxa9ow-sijcF3ss84dRU/edit document final
-https://docs.google.com/document/d/145BSewS5fcprUZeHnoRt7UxzUQQl5GUh/edit document présentation
+Maquettes
+https://www.figma.com/proto/acX852w6dqdpD1PPby348q/CineGest?node-id=14-2002&p=f&t=zBV8z4n4uQItd5x7-1&scaling=min-zoom&content-scaling=fixed&page-id=3%3A1529&starting-point-node-id=14%3A2002&show-proto-sidebar=1
+Rapport Final
+https://docs.google.com/document/d/1cCb-VSch8v5-m_bKD0Lpv7ngU-1sa--kkrS0xBAHwRQ/edit?tab=t.0 
+Document présentation
+https://docs.google.com/presentation/d/1z_9eaphDB9-DyCXrcVFx8LyaMcGEoUMDUQSdb_z4q5I/edit?slide=id.p#slide=id.p 
